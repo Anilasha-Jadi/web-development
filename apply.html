@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply for Certificates</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+
+.progress-bar {
+      background-color: #007bff; /* Blue color */
+      color: green; /* White text */
+      height: 40px; /* Adjust height as needed */
+      line-height: 40px; /* Match height to center the text vertically */
+      font-size: 16px; /* Adjust font size as needed */
+width:1000px;
+}
+</style>
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Apply for Certificates</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <h3>Bonafide Certificate</h3>
+        <p>A certificate confirming the student's affiliation with the institution.</p>
+        <button class="btn btn-primary" onclick="requestProcessing('Bonafide')">Request Processing</button>
+      </div>
+      <div class="col-md-4">
+        <h3>College Leaving Certificate</h3>
+        <p>A certificate indicating that the student has left the college.</p>
+        <button class="btn btn-primary" onclick="requestProcessing('College Leaving')">Request Processing</button>
+      </div>
+      <div class="col-md-4">
+        <h3>Transfer Certificate</h3>
+        <p>A certificate required for transfer to another institution.</p>
+        <button class="btn btn-primary" onclick="requestProcessing('Transfer')">Request Processing</button>
+      </div>
+      <!-- Add more certificates as needed -->
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery (optional for some Bootstrap features) -->
+  
+
+  <script>
+    function requestProcessing(certificateName) {
+      // Create a progress bar for the requested certificate
+      createProgressBar(certificateName);
+    }
+
+    function createProgressBar(certificateName) {
+      // Create a new progress bar div
+      var progressBarDiv = document.createElement("div");
+      progressBarDiv.className = "progress mt-3";
+      var progressBarInner = document.createElement("div");
+      progressBarInner.className = "progress-bar";
+      progressBarInner.setAttribute("role", "progressbar");
+      progressBarInner.setAttribute("aria-valuenow", "25");
+      progressBarInner.setAttribute("aria-valuemin", "0");
+      progressBarInner.setAttribute("aria-valuemax", "100");
+      progressBarInner.style.width = "25%";
+      progressBarInner.innerHTML = "25%";
+      progressBarDiv.appendChild(progressBarInner);
+      
+      // Add certificate name to the progress bar
+      var certificateNameHeading = document.createElement("h4");
+      certificateNameHeading.textContent = certificateName + " Certificate";
+      progressBarDiv.appendChild(certificateNameHeading);
+      
+      // Add file upload input
+      var fileInput = document.createElement("input");
+      fileInput.setAttribute("type", "file");
+      fileInput.setAttribute("id", "fileInput");
+      fileInput.className = "form-control mt-3";
+      fileInput.addEventListener("change", function() {
+        handleFileUpload(this.files[0], certificateName);
+      });
+      progressBarDiv.appendChild(fileInput);
+      
+      // Append progress bar to the container
+      document.body.appendChild(progressBarDiv);
+    }
+
+    function handleFileUpload(file, certificateName) {
+      // Perform file upload operation here, for example, send file to server via AJAX
+      console.log("Uploading file:", file.name, "for", certificateName);
+      // Reset file input after uploading
+      document.getElementById("fileInput").value = "";
+    }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
